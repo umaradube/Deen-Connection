@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deen Connection - Islamic Marital Guidance</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for crisp, professional typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Amiri&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        arabic: ['Amiri', 'serif'],
+                    },
+                    colors: {
+                        quranDark: '#121212',
+                        quranCard: '#1f1f1f',
+                        quranBorder: '#2d2d2d',
+                        islamicGreen: '#10b981',
+                        islamicGreenHover: '#059669',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 96px;
+        }
+
+        section {
+            scroll-margin-top: 96px;
+        }
+
+        .mobile-nav-panel {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            gap: 0.35rem;
+            padding: 0.75rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            background: rgba(17, 24, 39, 0.98);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .mobile-nav-panel.open {
+            display: flex;
+        }
+
+        /* Smooth accordion transitions */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+        .accordion-content.open {
+            max-height: 1000px;
+            padding-bottom: 1.25rem;
+        }
+        .rotate-icon {
+            transition: transform 0.2s ease;
+        }
+        .rotate-icon.open {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-quranDark text-gray-100 font-sans antialiased selection:bg-islamicGreen selection:text-quranDark">
+
+    <!-- Top Banner: Shahada 
+    <div class="border-b border-quranBorder bg-quranDark/50 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-2 flex justify-between items-center text-xs text-gray-400">
+            <div>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <div class="font-arabic text-lg text-islamicGreen tracking-wide" dir="rtl">
+                لَا إِلَٰهَ إِلَّا ٱللَّٰهُ مُحَمَّدٌ رَسُولُ ٱللَّٰهِ
+            </div>
+        </div> -->
+        
+        <!-- Navbar -->
+        <nav class="border-t border-quranBorder bg-quranCard/30 sticky top-0 z-50 backdrop-blur">
+            <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <div class="flex items-center justify-between gap-3 w-full md:w-auto">
+                    <a href="#verse" class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                        <span class="w-2 h-6 bg-islamicGreen rounded-full"></span>
+                        Deen<span class="text-islamicGreen">Connection</span>
+                    </a>
+                    <button id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" class="md:hidden inline-flex items-center justify-center rounded-lg border border-quranBorder bg-quranDark/80 px-3 py-2 text-gray-200">☰</button>
+                </div>
+
+                <div class="nav-links hidden md:flex flex-wrap items-center justify-end gap-6 text-sm font-medium text-gray-400 md:ml-auto">
+                    <a href="#verse" class="hover:text-white transition">The Command</a>
+                    <a href="#self-reflection" class="hover:text-white transition">Self Reflection</a>
+                    <a href="#sharia-guidance" class="hover:text-white transition">Sharia Guidance</a>
+                    <a href="#assistance" class="hover:text-white transition">Get Assistance</a>
+                    <a href="#virtues" class="hover:text-white transition">Virtues & Sunnah</a>
+                </div>
+
+                <div id="mobileMenu" class="mobile-nav-panel md:hidden">
+                    <a href="#verse" class="hover:text-white transition">The Command</a>
+                    <a href="#self-reflection" class="hover:text-white transition">Self Reflection</a>
+                    <a href="#sharia-guidance" class="hover:text-white transition">Sharia Guidance</a>
+                    <a href="#assistance" class="hover:text-white transition">Get Assistance</a>
+                    <a href="#virtues" class="hover:text-white transition">Virtues & Sunnah</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="max-w-4xl mx-auto px-4 py-12 space-y-16">
+
+        <!-- Quranic Verse Section -->
+        <section id="verse" class="text-center space-y-6 py-8 border-b border-quranBorder">
+            <div class="text-xs font-semibold tracking-widest text-islamicGreen uppercase">Surah An-Nisa [4:135]</div>
+            <br>
+            
+            <!-- Arabic Text -->
+            <div class="font-arabic text-3xl md:text-4xl text-white leading-loose tracking-wide max-w-3xl mx-auto" dir="rtl">
+                يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ كُونُوا۟ قَوَّٰمِينَ بِٱلْقِسْطِ شُهَدَآءَ لِلَّهِ وَلَوْ عَلَىٰٓ أَنفُسِكُمْ أَوِ ٱلْوَٰلِدَيْنِ وَٱلْأَقْرَبِينَ ۚ
+            </div>
+            
+            <!-- Translation -->
+            <div class="max-w-2xl mx-auto text-gray-300 font-light italic leading-relaxed text-base md:text-lg">
+                "O you who have believed, be persistently standing firm in justice, witnesses for Allah, even if it be against yourselves or parents and relatives..."
+            </div>
+        </section>
+
+        <!-- Dynamic Accordion Block: Self Reflection -->
+        <section id="self-reflection" class="space-y-6">
+            <div class="text-center">
+                <h2 class="text-2xl font-semibold text-white">"I am not perfect"</h2>
+                <p class="text-sm text-gray-400 mt-1">Honest paths to understanding internal and external struggles.</p>
+            </div>
+
+            <div class="space-y-3">
+                <!-- Dropdown 1 -->
+                <div class="bg-quranCard border border-quranBorder rounded-lg overflow-hidden">
+                    <button onclick="toggleAccordion('acc1')" class="w-full flex justify-between items-center p-5 text-left font-medium hover:bg-white/[0.02] transition">
+                        <span>1) Why is my marriage on a knife's edge?</span>
+                        <svg id="icon-acc1" class="rotate-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="acc1" class="accordion-content px-5 text-sm text-gray-400 leading-relaxed">
+                        Marriages frequently face volatility due to a breakdown in communication, unmet expectations, or a departure from the mutual rights and compassions commanded in the Deen. Identifying the root trigger requires deep introspection.
+                    </div>
+                </div>
+
+                <!-- Dropdown 2 -->
+                <div class="bg-quranCard border border-quranBorder rounded-lg overflow-hidden">
+                    <button onclick="toggleAccordion('acc2')" class="w-full flex justify-between items-center p-5 text-left font-medium hover:bg-white/[0.02] transition">
+                        <span>2) Why am I Divorced?</span>
+                        <svg id="icon-acc2" class="rotate-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="acc2" class="accordion-content px-5 text-sm text-gray-400 leading-relaxed">
+                        While divorce is permissible as a last resort in Islam, reflections often reveal unresolved financial strains, incompatibility in core values, or external interferences that outpaced the couple's patience (Sabr).
+                    </div>
+                </div>
+
+                <!-- Dropdown 3 -->
+                <div class="bg-quranCard border border-quranBorder rounded-lg overflow-hidden">
+                    <button onclick="toggleAccordion('acc3')" class="w-full flex justify-between items-center p-5 text-left font-medium hover:bg-white/[0.02] transition">
+                        <span>3) What Steps do I take before getting married?</span>
+                        <svg id="icon-acc3" class="rotate-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="acc3" class="accordion-content px-5 text-sm text-gray-400 leading-relaxed">
+                        Prioritize evaluating religious commitment and character (Deen and Akhlaq), perform the Prayer of Guidance (Istikhara), ensure transparent communication regarding expectations, and seek counsel from trusted family mentors.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Sharia Context & Alignment -->
+        <section id="sharia-guidance" class="space-y-6">
+            <h2 class="text-xl font-semibold text-white border-l-4 border-islamicGreen pl-3">Sharia Guidance & Choice</h2>
+            
+            <!-- Quick Alert / Notice Box -->
+            <div class="bg-quranCard border-l-4 border-amber-500 bg-amber-500/5 p-4 rounded-r-lg text-sm text-gray-300">
+                <span class="font-semibold text-amber-400">Reconciliation Note:</span> I am divorced, how do I get back to my ex based on Sharia? This depends strictly on the type and number of pronouncements (Talaq). Consult an accredited local Aalim/Imam immediately to review your specific configuration.
+            </div>
+
+            <!-- Nested Selection Layout -->
+            <div class="bg-quranCard border border-quranBorder rounded-lg p-6 space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Who do I get Married to?</label>
+                    <p class="text-xs text-gray-500 mb-4">Select a category below to explore relational dynamics and foundational boundaries.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Target 1 -->
+                    <div class="border border-quranBorder rounded-md p-2">
+                        <button onclick="toggleAccordion('target1')" class="w-full flex justify-between items-center text-xs font-medium uppercase tracking-wider text-gray-400 p-2 hover:text-white">
+                            <span>1) Husband / Wife</span>
+                            <svg id="icon-target1" class="rotate-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="target1" class="accordion-content px-2 text-xs text-gray-400 mt-2">
+                            Focus fundamentally on compatibility, shared long-term religious aspirations, emotional maturity, and the capacity to fulfill marital obligations seamlessly.
+                        </div>
+                    </div>
+                    <!-- Target 2 -->
+                    <div class="border border-quranBorder rounded-md p-2">
+                        <button onclick="toggleAccordion('target2')" class="w-full flex justify-between items-center text-xs font-medium uppercase tracking-wider text-gray-400 p-2 hover:text-white">
+                            <span>2) In-laws</span>
+                            <svg id="icon-target2" class="rotate-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="target2" class="accordion-content px-2 text-xs text-gray-400 mt-2">
+                            Understand respect parameters, geographic boundaries for household independence, and building diplomatic bridges without compromising the foundational privacy of your marriage.
+                        </div>
+                    </div>
+                    <!-- Target 3 -->
+                    <div class="border border-quranBorder rounded-md p-2">
+                        <button onclick="toggleAccordion('target3')" class="w-full flex justify-between items-center text-xs font-medium uppercase tracking-wider text-gray-400 p-2 hover:text-white">
+                            <span>3) Society</span>
+                            <svg id="icon-target3" class="rotate-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="target3" class="accordion-content px-2 text-xs text-gray-400 mt-2">
+                            Navigating cultural pressures, community stigmas, and formatting your family structure strictly around Islamic dictates rather than standard shifting social trends.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Intervention & Assessment Form -->
+        <section id="assistance" class="space-y-6">
+            <div class="border-t border-quranBorder pt-12">
+                <h2 class="text-2xl font-bold text-white tracking-tight">Marital Intervention Portal</h2>
+                <p class="text-sm text-gray-400 mt-1">Submit specific details cleanly to receive structured mediation support.</p>
+            </div>
+
+            <form class="bg-quranCard border border-quranBorder rounded-xl p-6 space-y-6" onsubmit="event.preventDefault(); alert('Form submitted securely.');">
+                
+                <!-- Issue Explanation -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-200">I have marital problems - help me solve them.</label>
+                    <textarea rows="4" required class="w-full bg-quranDark border border-quranBorder rounded-lg px-4 py-3 text-sm text-gray-200 focus:outline-none focus:border-islamicGreen transition placeholder-gray-600" placeholder="Explain your issues thoroughly in this section..."></textarea>
+                </div>
+
+                <!-- Spouse Number Contact -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-200">Verification Details</label>
+                    <input type="tel" required class="w-full bg-quranDark border border-quranBorder rounded-lg px-4 py-3 text-sm text-gray-200 focus:outline-none focus:border-islamicGreen transition placeholder-gray-600" placeholder="Please provide your spouse's contact number for verification">
+                </div>
+
+                <!-- Deep Assessment: Suspicion Block -->
+                <div class="border-t border-quranBorder pt-6 space-y-4">
+                    <span class="text-sm font-semibold text-gray-300 block">Section Framework: I suspect my spouse is up to something</span>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div class="space-y-1">
+                            <label class="text-gray-400 font-medium">1) What is the cause of the suspicion?</label>
+                            <input type="text" class="w-full bg-quranDark border border-quranBorder rounded px-3 py-2 text-gray-200 focus:outline-none focus:border-islamicGreen">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-gray-400 font-medium">2) Are you honest enough with yourself?</label>
+                            <select class="w-full bg-quranDark border border-quranBorder rounded px-3 py-2 text-gray-200 focus:outline-none focus:border-islamicGreen">
+                                <option>Select Assessment</option>
+                                <option>Yes, entirely</option>
+                                <option>I am processing personal biases</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-gray-400 font-medium">3) Are you comfortable narrating your shortcomings?</label>
+                            <select class="w-full bg-quranDark border border-quranBorder rounded px-3 py-2 text-gray-200 focus:outline-none focus:border-islamicGreen">
+                                <option>Select Assessment</option>
+                                <option>Yes, ready to share</option>
+                                <option>No, I need individual space</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-gray-400 font-medium">4) When did you notice a change from your spouse?</label>
+                            <input type="text" class="w-full bg-quranDark border border-quranBorder rounded px-3 py-2 text-gray-200 focus:outline-none focus:border-islamicGreen" placeholder="Timeline details">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-gray-400 font-medium">5) Have you involved your witness to your reunion?</label>
+                            <select class="w-full bg-quranDark border border-quranBorder rounded px-3 py-2 text-gray-200 focus:outline-none focus:border-islamicGreen">
+                                <option>Select Assessment</option>
+                                <option>Yes, witnesses are aware</option>
+                                <option>Not yet</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-gray-400 font-medium">6) Have you discussed the issue as a couple with an Aalim/Imam?</label>
+                            <select class="w-full bg-quranDark border border-quranBorder rounded px-3 py-2 text-gray-200 focus:outline-none focus:border-islamicGreen">
+                                <option>Select Assessment</option>
+                                <option>Yes, we have completed initial consultation</option>
+                                <option>No, this will be the first step</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Preferences Block -->
+                <div class="bg-quranDark/60 border border-quranBorder rounded-lg p-4 space-y-3">
+                    <label class="block text-sm font-medium text-gray-300">Mediation Format Preference</label>
+                    <p class="text-xs text-gray-500">Are you comfortable having a chat online? Or are you comfortable having a face to face conversation as a couple with us?</p>
+                    <div class="flex flex-wrap gap-4 text-xs pt-1">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="chat_pref" class="text-islamicGreen focus:ring-0 bg-quranDark border-quranBorder">
+                            <span>Comfortable with Online Chat</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="chat_pref" class="text-islamicGreen focus:ring-0 bg-quranDark border-quranBorder">
+                            <span>Comfortable with Face-to-Face Consultation</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-islamicGreen hover:bg-islamicGreenHover text-quranDark font-semibold py-3 px-4 rounded-lg transition text-sm">
+                    Submit Case File for Mediation
+                </button>
+            </form>
+        </section>
+
+        <!-- Educational Knowledge Base: Virtues and Core Advice -->
+        <section id="virtues" class="space-y-6 pt-6">
+            <h2 class="text-xl font-semibold text-white border-l-4 border-islamicGreen pl-3">Virtues, Sunnah & Resolution</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <!-- Card 1 -->
+                <div class="bg-quranCard border border-quranBorder rounded-lg p-5 space-y-2">
+                    <h3 class="text-sm font-semibold text-white flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-islamicGreen rounded-full"></span>
+                        How do I spice up my marriage?
+                    </h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Incorporate small acts of unexpected kindness, set aside intentional distraction-free quality time, and ensure consistent verbal affirmation to revive mutual intimacy.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-quranCard border border-quranBorder rounded-lg p-5 space-y-2">
+                    <h3 class="text-sm font-semibold text-white flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-islamicGreen rounded-full"></span>
+                        Let's understand the virtue of marriage
+                    </h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        In the Sharia context, marriage constitutes fulfilling half of one's religious path (Deen). It acts as a sacred fortress shielding chastity, cultivating emotional tranquility, and anchoring spiritual focus.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-quranCard border border-quranBorder rounded-lg p-5 space-y-2">
+                    <h3 class="text-sm font-semibold text-white flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-islamicGreen rounded-full"></span>
+                        How to incorporate Sunnah into our marriage
+                    </h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Emulate the Prophet Muhammad (ﷺ) by maintaining a smiling disposition, actively assisting with everyday household responsibilities, and praying together as a unit to build localized spiritual blessings.
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-quranCard border border-quranBorder rounded-lg p-5 space-y-2">
+                    <h3 class="text-sm font-semibold text-white flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-islamicGreen rounded-full"></span>
+                        What are minor factors that drive mahabbah away?
+                    </h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Persistent minor criticisms, public corrections, neglect of basic physical hygiene, and ungrateful habits quietly corrode affection (Mahabbah) over long periods.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Full-width Resolution Card -->
+            <div class="bg-gradient-to-r from-quranCard to-quranDark border border-quranBorder rounded-lg p-6 mt-4">
+                <h3 class="text-sm font-semibold text-white mb-2">How do we resolve our marital problems?</h3>
+                <p class="text-xs text-gray-400 leading-relaxed">
+                    Approach points of contention with genuine sincerity, isolate arguments immediately from external ears, and agree entirely to map out solutions strictly utilizing the parameters defined by Quranic directives and clean prophetic examples.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Simple Minimalist Footer -->
+    <footer class="border-t border-quranBorder mt-24 bg-quranCard/20">
+        <div class="max-w-6xl mx-auto px-4 py-8 text-center text-xs text-gray-500 space-y-2">
+            <p>© 2026 Deen Connection. Built cleanly with inspiration from classic spiritual platforms.</p>
+            <p class="text-gray-600">Rooted firmly in justice, accountability, and pristine traditional family ethics.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic JavaScript -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        if (menuToggle && mobileMenu) {
+            menuToggle.addEventListener('click', () => {
+                const isOpen = mobileMenu.classList.toggle('open');
+                menuToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+
+            mobileMenu.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener('click', (event) => {
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (!target) return;
+                event.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById('icon-' + id);
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                if(icon) icon.classList.remove('open');
+            } else {
+                content.classList.add('open');
+                if(icon) icon.classList.add('open');
+            }
+        }
+    </script>
+</body>
+</html>
