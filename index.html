@@ -41,6 +41,30 @@
             scroll-margin-top: 96px;
         }
 
+        body {
+            background: radial-gradient(circle at top, rgba(255,255,255,0.06), transparent 28%), linear-gradient(rgba(17,24,39,0.96), rgba(17,24,39,0.96));
+        }
+
+        #background-rotator {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: url('wall2.jpeg') center center / cover no-repeat;
+            transform-origin: center center;
+            will-change: transform;
+            opacity: 0.28;
+            pointer-events: none;
+        }
+
+        #background-rotator::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(17,24,39,0.18), rgba(17,24,39,0.9));
+            pointer-events: none;
+        }
+
         .mobile-nav-panel {
             display: none;
             width: 100%;
@@ -75,7 +99,8 @@
         }
     </style>
 </head>
-<body class="bg-quranDark text-gray-100 font-sans antialiased selection:bg-islamicGreen selection:text-quranDark" style="background: linear-gradient(rgba(17,24,39,0.9), rgba(17,24,39,0.9)), url('wall2.jpeg') center/cover no-repeat fixed;">
+<body class="bg-quranDark text-gray-100 font-sans antialiased selection:bg-islamicGreen selection:text-quranDark">
+        <div id="background-rotator" class="fixed inset-0 -z-10 pointer-events-none overflow-hidden"></div>
 
     <!-- Top Banner: Shahada 
     <div class="border-b border-quranBorder bg-quranDark/50 backdrop-blur sticky top-0 z-50">
@@ -386,7 +411,7 @@
     <!-- Simple Minimalist Footer -->
     <footer class="border-t border-quranBorder mt-24 bg-quranCard/20">
         <div class="max-w-6xl mx-auto px-4 py-8 text-center text-xs text-gray-500 space-y-2">
-            <p>© 2026 Deen Connection. Built cleanly with inspiration from classic spiritual platforms.</p>
+            <p>© 2026 Deen Connection.</p>
             <p class="text-gray-600">Rooted firmly in justice, accountability, and pristine traditional family ethics.</p>
         </div>
     </footer>
@@ -430,6 +455,30 @@
                 if(icon) icon.classList.add('open');
             }
         }
+
+        const backgroundRotator = document.getElementById('background-rotator');
+        let isTicking = false;
+
+        function updateBackgroundRotation() {
+            if (!backgroundRotator) return;
+            const scrollTop = window.scrollY;
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = maxScroll > 0 ? scrollTop / maxScroll : 0;
+            const degrees = progress * 360;
+            backgroundRotator.style.transform = `rotate(${degrees}deg) scale(1.08)`;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!isTicking) {
+                window.requestAnimationFrame(() => {
+                    updateBackgroundRotation();
+                    isTicking = false;
+                });
+                isTicking = true;
+            }
+        });
+
+        updateBackgroundRotation();
     </script>
 </body>
 </html>
